@@ -1,0 +1,269 @@
+:root {
+  --ink: #152033;
+  --ink-soft: #41506a;
+  --paper: #eef4fb;
+  --paper-strong: #fdfefe;
+  --line: #d6e1ef;
+  --brand: #147d64;
+  --brand-2: #ff9e44;
+  --head-a: #285f8f;
+  --head-b: #3685b5;
+  --danger: #d64545;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 8% 8%, #ecf6ff 0, #eef4fb 40%, #e7edf8 100%);
+  min-height: 100vh;
+}
+
+.bg-shape {
+  position: fixed;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.bg-shape-1 {
+  width: 280px;
+  height: 280px;
+  background: #36c2a6;
+  top: -90px;
+  right: -70px;
+}
+
+.bg-shape-2 {
+  width: 320px;
+  height: 320px;
+  background: #4c88ff;
+  bottom: -120px;
+  left: -90px;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, calc(100% - 2rem));
+  margin: 1.2rem auto 2rem;
+  display: grid;
+  gap: 1rem;
+  animation: rise 0.55s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  margin: 0.2rem 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.hero p {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--ink-soft);
+}
+
+.kicker {
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.12rem;
+  font-size: 0.75rem;
+  color: var(--brand);
+  margin: 0;
+}
+
+.card {
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(70, 64, 42, 0.08);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.8rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  padding: 0.65rem 0.95rem;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.btn-accent {
+  background: var(--brand-2);
+  color: #1f1f1f;
+}
+
+.btn-secondary {
+  background: #2f5d8a;
+  color: #fff;
+}
+
+.btn-link {
+  background: #0f766e;
+  color: #fff;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.78rem;
+}
+
+.btn-delete {
+  background: var(--danger);
+  color: #fff;
+}
+
+.table-wrap {
+  padding: 0.5rem;
+}
+
+.table-scroll {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 1540px;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid #e4ebf5;
+  padding: 0.55rem;
+  vertical-align: top;
+}
+
+th:first-child,
+td:first-child {
+  border-left: 1px solid #e4ebf5;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, var(--head-a), var(--head-b));
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+tbody tr:nth-child(odd) td {
+  background: #fbfdff;
+}
+
+tbody tr:hover td {
+  background: #f0f6ff;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #c9d8ec;
+  border-radius: 8px;
+  padding: 0.52rem;
+  font-family: inherit;
+  font-size: 0.86rem;
+  background: #fcfeff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4d8ccb;
+  box-shadow: 0 0 0 3px rgba(77, 140, 203, 0.18);
+}
+
+.cell-stack {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.metric {
+  font-family: "IBM Plex Mono", monospace;
+  background: #eef4ff;
+  border-radius: 8px;
+  padding: 0.55rem;
+  min-width: 130px;
+}
+
+.qr-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  gap: 0.55rem;
+}
+
+.qr-box {
+  border: 1px dashed #96afd0;
+  background: #fff;
+  border-radius: 10px;
+  min-height: 145px;
+  display: grid;
+  place-items: center;
+  font-size: 0.74rem;
+  color: #5b6f90;
+  padding: 0.4rem;
+}
+
+.qr-box img {
+  width: 136px;
+  height: 136px;
+}
+
+th:nth-child(5),
+th:nth-child(8),
+td:nth-child(5),
+td:nth-child(8) {
+  min-width: 260px;
+}
+
+th:nth-child(11),
+td:nth-child(11) {
+  min-width: 290px;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    width: calc(100% - 1rem);
+    margin-top: 0.7rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+}
