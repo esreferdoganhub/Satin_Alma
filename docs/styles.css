@@ -19,6 +19,7 @@
 body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
   color: var(--ink);
   background: radial-gradient(circle at 8% 8%, #ecf6ff 0, #eef4fb 40%, #e7edf8 100%);
   min-height: 100vh;
@@ -80,6 +81,7 @@ body {
   margin: 0;
   max-width: 70ch;
   color: var(--ink-soft);
+  font-size: 1.2rem;
 }
 
 .meta-line {
@@ -95,7 +97,7 @@ body {
   align-items: center;
   border-radius: 999px;
   padding: 0.26rem 0.62rem;
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-family: "IBM Plex Mono", monospace;
   color: #fff;
   background: linear-gradient(135deg, #1f7cb6, #2f5d8a);
@@ -110,7 +112,7 @@ body {
 .kicker {
   font-family: "IBM Plex Mono", monospace;
   letter-spacing: 0.12rem;
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: var(--brand);
   margin: 0;
 }
@@ -134,6 +136,7 @@ body {
   border-radius: 10px;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
+  font-size: 1.02rem;
   padding: 0.65rem 0.95rem;
   cursor: pointer;
   transition: transform 0.16s ease, box-shadow 0.16s ease;
@@ -163,7 +166,7 @@ body {
   background: #0f766e;
   color: #fff;
   padding: 0.45rem 0.6rem;
-  font-size: 0.78rem;
+  font-size: 1rem;
 }
 
 .btn-delete {
@@ -172,15 +175,22 @@ body {
 }
 
 .table-wrap {
+  display: flex;
+  justify-content: center;
   padding: 0.5rem;
 }
 
 .table-scroll {
-  overflow: auto;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
+  margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0;
   min-width: 1540px;
@@ -192,6 +202,8 @@ td {
   border-right: 1px solid #e4ebf5;
   padding: 0.55rem;
   vertical-align: top;
+  white-space: normal;
+  word-break: break-word;
 }
 
 th:first-child,
@@ -204,7 +216,7 @@ th {
   top: 0;
   background: linear-gradient(135deg, var(--head-a), var(--head-b));
   color: #fff;
-  font-size: 0.82rem;
+  font-size: 1.05rem;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
   z-index: 1;
@@ -224,7 +236,7 @@ input {
   border-radius: 8px;
   padding: 0.52rem;
   font-family: inherit;
-  font-size: 0.86rem;
+  font-size: 1.1rem;
   background: #fcfeff;
 }
 
@@ -245,6 +257,7 @@ input:focus {
   border-radius: 8px;
   padding: 0.55rem;
   min-width: 130px;
+  font-size: 1.05rem;
 }
 
 .qr-pair {
@@ -260,7 +273,7 @@ input:focus {
   min-height: 145px;
   display: grid;
   place-items: center;
-  font-size: 0.74rem;
+  font-size: 1rem;
   color: #5b6f90;
   padding: 0.4rem;
 }
@@ -289,6 +302,6 @@ td:nth-child(11) {
   }
 
   .hero p {
-    font-size: 0.9rem;
+    font-size: 1.08rem;
   }
 }
