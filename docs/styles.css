@@ -162,6 +162,14 @@ body {
   color: #fff;
 }
 
+.btn-template {
+  background: #7052d9;
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
 .btn-link {
   background: #0f766e;
   color: #fff;
@@ -172,6 +180,12 @@ body {
 .btn-delete {
   background: var(--danger);
   color: #fff;
+}
+
+.hint-line {
+  margin: -0.35rem 0 0.15rem;
+  color: #3f5470;
+  font-size: 1rem;
 }
 
 .table-wrap {
