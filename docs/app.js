@@ -392,6 +392,18 @@ async function exportExcel() {
     right: { style: "thin", color: { argb: "FFD5DEEA" } },
   };
 
+  // Print setup: landscape, fit all columns to one page width, and include whole table area.
+  ws.pageSetup = {
+    ...ws.pageSetup,
+    orientation: "landscape",
+    fitToPage: true,
+    fitToWidth: 1,
+    fitToHeight: 0,
+    paperSize: 9,
+    horizontalCentered: true,
+    printArea: `A1:J${noteRowIdx}`,
+  };
+
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], {
     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
