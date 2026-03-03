@@ -222,11 +222,47 @@ th {
   z-index: 1;
 }
 
+th:nth-child(1),
+td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  min-width: 240px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  position: sticky;
+  left: 240px;
+  min-width: 180px;
+}
+
+th:nth-child(1),
+th:nth-child(2) {
+  z-index: 6;
+  background: linear-gradient(135deg, var(--head-a), var(--head-b));
+}
+
+td:nth-child(1),
+td:nth-child(2) {
+  z-index: 3;
+  background: #ffffff;
+}
+
 tbody tr:nth-child(odd) td {
   background: #fbfdff;
 }
 
+tbody tr:nth-child(odd) td:nth-child(1),
+tbody tr:nth-child(odd) td:nth-child(2) {
+  background: #fbfdff;
+}
+
 tbody tr:hover td {
+  background: #f0f6ff;
+}
+
+tbody tr:hover td:nth-child(1),
+tbody tr:hover td:nth-child(2) {
   background: #f0f6ff;
 }
 
