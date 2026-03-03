@@ -29,6 +29,50 @@ function isValidHttpUrl(value) {
   }
 }
 
+function parsePrice(value) {
+  if (value == null || value === "") return 0;
+
+  if (typeof value === "number") {
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  let text = String(value).trim();
+  if (!text) return 0;
+
+  text = text.replace(/\s+/g, "");
+  text = text.replace(/₺|TL|tl|TRY|try/gi, "");
+  text = text.replace(/[^0-9,.-]/g, "");
+  if (!text) return 0;
+
+  const hasComma = text.includes(",");
+  const hasDot = text.includes(".");
+
+  if (hasComma && hasDot) {
+    if (text.lastIndexOf(",") > text.lastIndexOf(".")) {
+      text = text.replace(/\./g, "").replace(/,/g, ".");
+    } else {
+      text = text.replace(/,/g, "");
+    }
+  } else if (hasComma) {
+    const parts = text.split(",");
+    const last = parts[parts.length - 1] || "";
+    if (parts.length > 1 && last.length <= 2) {
+      text = `${parts.slice(0, -1).join("")}.${last}`;
+    } else {
+      text = parts.join("");
+    }
+  } else if (hasDot) {
+    const parts = text.split(".");
+    const last = parts[parts.length - 1] || "";
+    if (parts.length > 1 && last.length === 3) {
+      text = parts.join("");
+    }
+  }
+
+  const parsed = Number(text);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 async function generateQrDataUrl(url) {
   return QRCode.toDataURL(url, {
     width: 260,
@@ -41,8 +85,8 @@ async function generateQrDataUrl(url) {
 }
 
 function computeMetrics(rowEl) {
-  const low = Number(rowEl.querySelector('[data-key="lowPrice"]').value || 0);
-  const high = Number(rowEl.querySelector('[data-key="highPrice"]').value || 0);
+  const low = parsePrice(rowEl.querySelector('[data-key="lowPrice"]').value);
+  const high = parsePrice(rowEl.querySelector('[data-key="highPrice"]').value);
   const avg = (low + high) / 2;
   const yearly = avg * 12;
 
@@ -74,8 +118,8 @@ async function setQrFromUrl(rowEl, key, url) {
   qrBox.dataset.qrData = qrDataUrl;
 }
 
-function createInputCell(key, type = "text", placeholder = "") {
-  return `<input type="${type}" step="0.01" data-key="${key}" placeholder="${placeholder}" />`;
+function createInputCell(key, type = "text", placeholder = "", attrs = "") {
+  return `<input type="${type}" data-key="${key}" placeholder="${placeholder}" ${attrs} />`;
 }
 
 function addRow(defaults = {}) {
@@ -86,7 +130,7 @@ function addRow(defaults = {}) {
   tr.innerHTML = `
     <td>${createInputCell("device", "text", "Orn. Rigol DS1102Z-E")}</td>
     <td>${createInputCell("model", "text", "Model")}</td>
-    <td>${createInputCell("lowPrice", "number", "0.00")}</td>
+    <td>${createInputCell("lowPrice", "text", "0,00 veya 0.00", 'inputmode="decimal"')}</td>
     <td>${createInputCell("lowSeller", "text", "Satici")}</td>
     <td>
       <div class="cell-stack">
@@ -94,7 +138,7 @@ function addRow(defaults = {}) {
         <button type="button" class="btn btn-link" data-link-btn="lowLink">Link Ekle + QR Uret</button>
       </div>
     </td>
-    <td>${createInputCell("highPrice", "number", "0.00")}</td>
+    <td>${createInputCell("highPrice", "text", "0,00 veya 0.00", 'inputmode="decimal"')}</td>
     <td>${createInputCell("highSeller", "text", "Satici")}</td>
     <td>
       <div class="cell-stack">
@@ -172,12 +216,6 @@ function getCellUrl(cell) {
   return "";
 }
 
-function parseNumeric(value) {
-  if (value == null || value === "") return 0;
-  const n = Number(value);
-  return Number.isFinite(n) ? n : 0;
-}
-
 async function importExcelFile(file) {
   const buffer = await file.arrayBuffer();
   const workbook = new ExcelJS.Workbook();
@@ -198,8 +236,8 @@ async function importExcelFile(file) {
     const model = String(row.getCell(2).value ?? "").trim();
     const lowLink = getCellUrl(row.getCell(5));
     const highLink = getCellUrl(row.getCell(8));
-    const lowPrice = parseNumeric(row.getCell(3).value);
-    const highPrice = parseNumeric(row.getCell(6).value);
+    const lowPrice = parsePrice(row.getCell(3).value);
+    const highPrice = parsePrice(row.getCell(6).value);
     const lowSeller = String(row.getCell(4).value ?? "").trim();
     const highSeller = String(row.getCell(7).value ?? "").trim();
 
@@ -234,10 +272,10 @@ function collectRows() {
     const rowData = {
       device: tr.querySelector('[data-key="device"]').value.trim(),
       model: tr.querySelector('[data-key="model"]').value.trim(),
-      lowPrice: Number(tr.querySelector('[data-key="lowPrice"]').value || 0),
+      lowPrice: parsePrice(tr.querySelector('[data-key="lowPrice"]').value),
       lowSeller: tr.querySelector('[data-key="lowSeller"]').value.trim(),
       lowLink: tr.querySelector('[data-key="lowLink"]').value.trim(),
-      highPrice: Number(tr.querySelector('[data-key="highPrice"]').value || 0),
+      highPrice: parsePrice(tr.querySelector('[data-key="highPrice"]').value),
       highSeller: tr.querySelector('[data-key="highSeller"]').value.trim(),
       highLink: tr.querySelector('[data-key="highLink"]').value.trim(),
       lowQr: tr.querySelector('[data-qr="lowLink"]').dataset.qrData || "",
