@@ -277,7 +277,7 @@ async function exportExcel() {
 
   ws.getRow(1).height = 28;
   ws.getRow(1).eachCell((cell) => {
-    cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
+    cell.font = { bold: true, size: 14, color: { argb: "FFFFFFFF" } };
     cell.fill = {
       type: "pattern",
       pattern: "solid",
@@ -351,9 +351,10 @@ async function exportExcel() {
         right: { style: "thin", color: { argb: "FFE1E6EE" } },
       };
       cell.alignment = { vertical: "middle", wrapText: true };
+      cell.font = { size: 14 };
     }
 
-    ws.getCell(`A${excelRow}`).font = { bold: true, color: { argb: "FF1B2A41" } };
+    ws.getCell(`A${excelRow}`).font = { bold: true, size: 14, color: { argb: "FF1B2A41" } };
 
     if (r.lowQr) {
       const lowImageId = workbook.addImage({ base64: r.lowQr, extension: "png" });
@@ -384,6 +385,7 @@ async function exportExcel() {
     fgColor: { argb: "FFF1F5FB" },
   };
   ws.getCell(`A${noteRowIdx}`).font = { color: { argb: "FF41506A" }, italic: true };
+  ws.getCell(`A${noteRowIdx}`).font = { size: 14, color: { argb: "FF41506A" }, italic: true };
   ws.getCell(`A${noteRowIdx}`).border = {
     top: { style: "thin", color: { argb: "FFD5DEEA" } },
     left: { style: "thin", color: { argb: "FFD5DEEA" } },
