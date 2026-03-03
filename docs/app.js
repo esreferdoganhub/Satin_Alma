@@ -226,7 +226,6 @@ async function importExcelFile(file) {
     return;
   }
 
-  alert("Excel basariyla ice aktarildi.");
 }
 
 function collectRows() {
