@@ -53,7 +53,7 @@ body {
 .app-shell {
   position: relative;
   z-index: 1;
-  width: min(1320px, calc(100% - 2rem));
+  width: min(1720px, calc(100% - 2rem));
   margin: 1.2rem auto 2rem;
   display: grid;
   gap: 1rem;
@@ -181,6 +181,8 @@ body {
 }
 
 .table-scroll {
+  display: flex;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
@@ -193,7 +195,7 @@ table {
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0;
-  min-width: 1540px;
+  min-width: 1700px;
 }
 
 th,
@@ -204,6 +206,7 @@ td {
   vertical-align: top;
   white-space: normal;
   word-break: break-word;
+  overflow: visible;
 }
 
 th:first-child,
@@ -226,14 +229,16 @@ th:nth-child(1),
 td:nth-child(1) {
   position: sticky;
   left: 0;
-  min-width: 240px;
+  width: 170px;
+  min-width: 170px;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
   position: sticky;
-  left: 240px;
-  min-width: 180px;
+  left: 170px;
+  width: 130px;
+  min-width: 130px;
 }
 
 th:nth-child(1),
@@ -323,12 +328,33 @@ th:nth-child(5),
 th:nth-child(8),
 td:nth-child(5),
 td:nth-child(8) {
-  min-width: 260px;
+  min-width: 340px;
 }
 
 th:nth-child(11),
 td:nth-child(11) {
-  min-width: 290px;
+  min-width: 360px;
+}
+
+th:nth-child(3),
+th:nth-child(6),
+td:nth-child(3),
+td:nth-child(6) {
+  min-width: 150px;
+}
+
+th:nth-child(4),
+th:nth-child(7),
+td:nth-child(4),
+td:nth-child(7) {
+  min-width: 170px;
+}
+
+th:nth-child(9),
+th:nth-child(10),
+td:nth-child(9),
+td:nth-child(10) {
+  min-width: 170px;
 }
 
 @media (max-width: 900px) {
