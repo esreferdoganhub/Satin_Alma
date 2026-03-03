@@ -3,6 +3,10 @@ const addRowBtn = document.getElementById("addRowBtn");
 const importBtn = document.getElementById("importBtn");
 const importFileInput = document.getElementById("importFileInput");
 const exportBtn = document.getElementById("exportBtn");
+const appVersionEl = document.getElementById("appVersion");
+const lastUpdatedEl = document.getElementById("lastUpdated");
+
+const APP_VERSION = "v1.0.0";
 
 let rowCounter = 0;
 
@@ -10,6 +14,11 @@ const fmt = new Intl.NumberFormat("tr-TR", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+
+function setBuildMeta() {
+  if (appVersionEl) appVersionEl.textContent = APP_VERSION;
+  if (lastUpdatedEl) lastUpdatedEl.textContent = new Date().toLocaleDateString("tr-TR");
+}
 
 function isValidHttpUrl(value) {
   try {
@@ -412,6 +421,8 @@ importFileInput.addEventListener("change", async (event) => {
 });
 
 exportBtn.addEventListener("click", exportExcel);
+
+setBuildMeta();
 
 addRow({
   device: "Rigol DS1102Z-E",
